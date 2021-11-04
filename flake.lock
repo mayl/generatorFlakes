@@ -1,0 +1,63 @@
+{
+  "nodes": {
+    "nixlib": {
+      "locked": {
+        "lastModified": 1624753224,
+        "narHash": "sha256-ZUEcPzgU1w8ZYeEgfcpzeciYcZShQZbEfRN2tV+K2yQ=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "7b4dc08734c5c4703b22b9c780417042e1c8f020",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixos-generators": {
+      "inputs": {
+        "nixlib": "nixlib",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1635958334,
+        "narHash": "sha256-P6IVMOAwx28aYeNo3GfbsDme1lfKVFO7SiZDhd++iMo=",
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "rev": "bb55fe72d939a30352ff5b78ba56b6a07e1e64c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1635844945,
+        "narHash": "sha256-tZcL307dj28jgEU1Wdn+zwG9neyW0H2+ZjdVhvJxh9g=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b67e752c29f18a0ca5534a07661366d6a2c2e649",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixos-generators": "nixos-generators",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
