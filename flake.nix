@@ -15,21 +15,21 @@
     pkgs = import nixpkgs{
       inherit system;
     };
-  in {
-    vbox = (nixpkgs.lib.nixosSystem {
-      inherit system pkgs;
-      modules = [ 
-        nixos-generators.nixosModules.virtualbox
-        ./configuration.nix
-      ];
-    }).config.system.build.virtualBoxOVA;
 
-    vagrant = (nixpkgs.lib.nixosSystem { 
+    nixosGenerate = { system, pkgs, modules, format, formatAttr }:
+    let 
+      formatModule = builtins.getAttr format nixos-generators.nixosModules;
+    in
+    builtins.getAttr formatAttr (nixpkgs.lib.nixosSystem { 
       inherit system pkgs;
       modules = [
-        nixos-generators.nixosModules.vagrant-virtualbox
-        ./configuration.nix
-      ];
-    }).config.system.build.vagrantVirtualbox;
+        formatModule
+      ] ++ modules;
+    }).config.system.build;
+  in {
+
+    vbox = nixosGenerate{ inherit system pkgs; modules = [./configuration.nix]; format = "virtualbox"; formatAttr = "virtualBoxOVA";};
+
+    vagrant = nixosGenerate{ inherit system pkgs; modules = [./configuration.nix]; format = "vagrant-virtualbox"; formatAttr = "vagrantVirtualbox"; };
   };
 }
