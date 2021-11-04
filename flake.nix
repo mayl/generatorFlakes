@@ -23,5 +23,13 @@
         ./configuration.nix
       ];
     }).config.system.build.virtualBoxOVA;
+
+    vagrant = (nixpkgs.lib.nixosSystem { 
+      inherit system pkgs;
+      modules = [
+        nixos-generators.nixosModules.vagrant-virtualbox
+        ./configuration.nix
+      ];
+    }).config.system.build.vagrantVirtualbox;
   };
 }
