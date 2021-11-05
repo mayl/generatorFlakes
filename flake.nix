@@ -27,9 +27,10 @@
       ] ++ modules;
     }).config.system.build;
   in {
-
     vbox = nixosGenerate{ inherit system pkgs; modules = [./configuration.nix]; format = "virtualbox"; formatAttr = "virtualBoxOVA";};
-
     vagrant = nixosGenerate{ inherit system pkgs; modules = [./configuration.nix]; format = "vagrant-virtualbox"; formatAttr = "vagrantVirtualbox"; };
+    vmware = nixosGenerate { inherit system pkgs; modules = [./configuration.nix]; format = "vmware"; formatAttr = "vmwareImage"; };
+    lxc = nixosGenerate { inherit system pkgs; modules = [./configuration.nix]; format = "lxc"; formatAttr = "tarball"; };
+    sd = nixosGenerate { pkgs=pkgs.pkgsCross.aarch64-multiplatform; system="aarch64-linux";  modules = [./configuration.nix "${pkgs.path}/nixos/modules/profiles/minimal.nix" ]; format = "sd-aarch64"; formatAttr = "sdImage"; };
   };
 }
