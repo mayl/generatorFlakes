@@ -18,35 +18,46 @@
       inherit system;
     };
     nixosGenerate = nixos-generators.nixosGenerate;
+    # nixosGenerate = { system, pkgs, modules, format }:
+    # let 
+    #   formatModule = builtins.getAttr format (nixos-generators.nixosModules);
+    #   image = nixpkgs.lib.nixosSystem {
+    #     inherit system pkgs;
+    #     modules = [
+    #       formatModule
+    #     ] ++ modules;
+    #   };
+    # in
+    #   image.config.system.build.${image.config.formatAttr};
+
 
   in {
     vbox = nixosGenerate{ 
-      inherit system pkgs;
+      inherit pkgs;
       modules = [./configuration.nix];
       format = "virtualbox"; 
     };
 
     vagrant = nixosGenerate{
-      inherit system pkgs;
+      inherit pkgs;
       modules = [./configuration.nix];
       format = "vagrant-virtualbox"; 
     };
 
     vmware = nixosGenerate { 
-      inherit system pkgs;
+      inherit pkgs;
       modules = [./configuration.nix];
       format = "vmware";
     };
 
     lxc = nixosGenerate {
-      inherit system pkgs;
+      inherit pkgs;
       modules = [./configuration.nix];
       format = "lxc";
     };
 
     sd = nixosGenerate { 
       pkgs=pkgs.pkgsCross.aarch64-multiplatform;
-      system="aarch64-linux";
       modules = [./configuration.nix "${pkgs.path}/nixos/modules/profiles/minimal.nix" ];
       format = "sd-aarch64"; };
   };
