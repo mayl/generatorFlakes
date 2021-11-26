@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixos-generators = {
-      # url = "github:nix-community/nixos-generators";
-      url = "github:mayl/nixos-generators";
+      url = "github:nix-community/nixos-generators";
+      # url = "github:mayl/nixos-generators";
       # url = "path:/home/larry/projects/nix/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
